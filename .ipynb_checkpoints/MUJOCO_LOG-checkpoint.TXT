@@ -1,0 +1,27 @@
+Fri May 30 16:34:39 2025
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 24.3400.
+
+Fri May 30 16:34:39 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 24.3400.
+
+Fri May 30 16:34:39 2025
+WARNING: Inertia matrix is too close to singular at DOF 4. Check model. Time = 24.3410.
+
+Fri May 30 16:34:39 2025
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 24.3420.
+
+Fri May 30 16:34:51 2025
+WARNING: Nan, Inf or huge value in QPOS at DOF 0. The simulation is unstable. Time = 0.0020.
+
+Fri May 30 16:35:05 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0780.
+
+Fri May 30 16:35:05 2025
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0800.
+
+Fri May 30 16:35:19 2025
+WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 0.0180.
+
+Fri May 30 16:35:19 2025
+WARNING: Nan, Inf or huge value in QVEL at DOF 0. The simulation is unstable. Time = 0.0200.
+
