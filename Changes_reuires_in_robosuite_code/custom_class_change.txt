@@ -1,0 +1,71 @@
+1) Create a new file: robosuite/environments/custom/spot_object_env.py
+See the content at last
+
+2) Add that into robosuite init.py file
+from robosuite.environments.custom.spot_object_env import SpotBaseObjectEnv
+
+
+spot_object_env.py:
+
+import os
+from robosuite.environments.base import MujocoEnv
+from robosuite.models.tasks import Task
+from robosuite.models.arenas import EmptyArena
+from robosuite.models.robots.robot_model import RobotModel
+from robosuite.models.objects import BoxObject
+import gym 
+import numpy as np
+
+class SpotBaseObjectEnv(MujocoEnv):
+    def __init__(self, **kwargs):
+        # Let MujocoEnv handle setup. We'll define model in _load_model
+        super().__init__(
+            control_freq=20,
+            horizon=500,
+            has_renderer=True,
+            has_offscreen_renderer=False,
+            render_camera="frontview",
+            render_collision_mesh=False,
+            render_visual_mesh=True,
+            renderer="mjviewer",
+            **kwargs
+        )
+
+    @property
+    def action_space(self):
+        # Assuming your Spot robot has 12 actuators (from your XML)
+        low = -1.0 * np.ones(12)
+        high = 1.0 * np.ones(12)
+        return gym.spaces.Box(low=low, high=high, dtype=np.float32)
+
+    def _load_model(self):
+        # 1. Load Spot base XML
+        current_dir = os.path.dirname(__file__)
+        spot_xml_path = os.path.abspath(
+            os.path.join(current_dir, "..", "..", "models", "assets", "robots", "spot", "robot.xml")
+        )
+        self.robot = RobotModel(fname=spot_xml_path, idn=0)
+        self.robot.set_base_xpos([0, 0, 0])
+        # 2. Create object
+        self.object = BoxObject(
+            name="box",
+            size=[0.04, 0.04, 0.04],
+            rgba=[1.0, 0.2, 0.2, 1.0],
+        )
+
+        # 3. Minimal arena
+        arena = EmptyArena()
+        arena.set_origin([0, 0, 0])
+
+        # 4. Assemble Task (robot + object)
+        self.model = Task(
+            mujoco_arena=arena,
+            mujoco_robots=[self.robot]
+        )
+        self.model.merge_objects([self.object])
+
+    def reward(self, action):
+        return 0
+
+    def _check_success(self):
+        return False
